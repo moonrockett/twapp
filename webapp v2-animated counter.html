@@ -1,0 +1,718 @@
+<html><head><base href="https://telegram-webapp-not-coin-clone.com">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NOT Coin Earner</title>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5865F2;
+            --secondary-color: #7289DA;
+            --text-color: #2E3338;
+            --background-color: #FFFFFF;
+            --card-background: #F6F6F6;
+            --success-color: #43B581;
+            --error-color: #F04747;
+            --inactive-color: #99AAB5;
+        }
+
+        body.dark-mode {
+            --primary-color: #7289DA;
+            --secondary-color: #5865F2;
+            --text-color: #FFFFFF;
+            --background-color: #36393F;
+            --card-background: #2F3136;
+            --inactive-color: #72767D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #root {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--background-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--inactive-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: var(--inactive-color);
+            margin-top: 5px;
+        }
+
+        .balance-display {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(88, 101, 242, 0.3);
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--card-background);
+            border-radius: 15px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+            color: var(--inactive-color);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .booster-button {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #FFFFFF;
+        }
+
+        .booster-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .booster-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+
+        .booster-timer {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .booster-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background-color: rgba(255,255,255,0.3);
+            transition: width 0.3s ease;
+        }
+
+        .led-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .led-indicator.on {
+            background-color: var(--success-color);
+            box-shadow: 0 0 10px var(--success-color);
+        }
+
+        .led-indicator.off {
+            background-color: var(--error-color);
+            box-shadow: 0 0 10px var(--error-color);
+        }
+
+        .referral-link {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 14px;
+            word-break: break-all;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .material-button {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .material-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .material-button .material-icons-round {
+            margin-right: 8px;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background-color: var(--background-color);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--text-color);
+        }
+
+        .popup-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-header h2 {
+            margin-left: 15px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .popup-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .popup-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .popup-stat {
+            text-align: center;
+        }
+
+        .popup-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .popup-stat-label {
+            font-size: 14px;
+            color: var(--inactive-color);
+            margin-top: 5px;
+        }
+
+        .popup-progress {
+            background-color: var(--card-background);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .popup-progress-bar {
+            height: 100%;
+            background-color: var(--success-color);
+            width: 60%;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .username {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 5px 10px;
+            background-color: var(--card-background);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .boosters-dots {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .booster-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--inactive-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .booster-dot.active {
+            background-color: var(--success-color);
+        }
+
+        .rank-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .balance-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-animator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFFFFF;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .balance-animator.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .balance-animator.animate-out {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const ranks = [
+            { name: 'Protostar', scale: '1/7 (Beginner)', description: "You're at the beginning of your journey, forming your stellar core.", baseTonPerHour: 1, image: 'protostar.svg' },
+            { name: 'Red Dwarf', scale: '2/7', description: "Small but steady, you're building up your energy reserves.", baseTonPerHour: 2, image: 'red_dwarf.svg' },
+            { name: 'Main Sequence', scale: '3/7', description: "You've reached a stable state, consistently generating energy.", baseTonPerHour: 3, image: 'main_sequence.svg' },
+            { name: 'Red Giant', scale: '4/7', description: "You're expanding your influence, becoming more prominent.", baseTonPerHour: 4, image: 'red_giant.svg' },
+            { name: 'Supernova', scale: '5/7', description: "You're exploding with energy, making a big impact!", baseTonPerHour: 5, image: 'supernova.svg' },
+            { name: 'Pulsar', scale: '6/7', description: "You're emitting regular pulses of high energy.", baseTonPerHour: 6, image: 'pulsar.svg' },
+            { name: 'Dark Matter Dynamo', scale: '7/7 (Highest)', description: "You've reached the pinnacle, harnessing the power of the unseen.", baseTonPerHour: 7, image: 'dark_matter.svg' }
+        ];
+
+        function App() {
+            const [balance, setBalance] = useState(123456);
+            const [rank, setRank] = useState(ranks[0]);
+            const [activeTab, setActiveTab] = useState('main');
+            const [boosters, setBoosters] = useState([
+                { id: 1, name: 'Fusion Frenzy', active: true, timeLeft: 86400, channelLink: 'https://t.me/booster1channel', color: '#FF6B6B' },
+                { id: 2, name: 'Solar Wind Surge', active: true, timeLeft: 86400, channelLink: 'https://t.me/booster2channel', color: '#4ECDC4' },
+                { id: 3, name: 'Nebula Nexus', active: true, timeLeft: 86400, channelLink: 'https://t.me/booster3channel', color: '#45B7D1' },
+                { id: 4, name: 'Gravity Slingshot', active: false, timeLeft: 0, channelLink: 'https://t.me/booster4channel', color: '#FFA600' },
+                { id: 5, name: 'Quantum Quasar', active: false, timeLeft: 0, channelLink: 'https://t.me/booster5channel', color: '#9B59B6' },
+                { id: 6, name: 'Dark Matter Dynamo', active: false, timeLeft: 0, channelLink: 'https://t.me/booster6channel', color: '#34495E' },
+                { id: 7, name: 'Cosmic Catalyst', active: false, timeLeft: 0, channelLink: 'https://t.me/booster7channel', color: '#1ABC9C' },
+            ]);
+            const [showPopup, setShowPopup] = useState(false);
+            const [popupContent, setPopupContent] = useState('');
+            const [isDarkMode, setIsDarkMode] = useState(false);
+            const [animatedBalance, setAnimatedBalance] = useState(balance);
+            const balanceRef = useRef(null);
+
+            const getActiveBoosters = () => boosters.filter(b => b.active).length;
+            const getBoostMultiplier = () => getActiveBoosters() || 1;
+            const getTotalTonPerHour = () => rank.baseTonPerHour * getBoostMultiplier();
+
+            useEffect(() => {
+                const timer = setInterval(() => {
+                    setBoosters(prevBoosters => 
+                        prevBoosters.map(booster => ({
+                            ...booster,
+                            timeLeft: Math.max(0, booster.timeLeft - 1),
+                            active: booster.timeLeft > 0
+                        }))
+                    );
+
+                    setBalance(prevBalance => {
+                        const newBalance = prevBalance + (getTotalTonPerHour() / 3600);
+                        animateBalance(newBalance);
+                        return newBalance;
+                    });
+                }, 1000);
+
+                return () => clearInterval(timer);
+            }, [rank.baseTonPerHour]);
+
+            useEffect(() => {
+                document.body.className = isDarkMode ? 'dark-mode' : '';
+            }, [isDarkMode]);
+
+            const animateBalance = (newBalance) => {
+                if (balanceRef.current) {
+                    const animator = balanceRef.current.querySelector('.balance-animator');
+                    const currentAnimator = balanceRef.current.querySelector('.balance-animator.animate');
+                    
+                    if (currentAnimator) {
+                        currentAnimator.classList.remove('animate');
+                        currentAnimator.classList.add('animate-out');
+                        setTimeout(() => {
+                            currentAnimator.remove();
+                        }, 500);
+                    }
+
+                    const newAnimator = document.createElement('div');
+                    newAnimator.className = 'balance-animator';
+                    newAnimator.textContent = newBalance.toFixed(6).padStart(10, '0') + ' TON';
+                    balanceRef.current.appendChild(newAnimator);
+
+                    setTimeout(() => {
+                        newAnimator.classList.add('animate');
+                    }, 50);
+
+                    setAnimatedBalance(newBalance);
+                }
+            };
+
+            const showRankInfo = () => {
+                setPopupContent(
+                    <div>
+                        <div className="popup-header">
+                            <img src={rank.image} alt={rank.name} className="rank-image" />
+                            <h2>{rank.name}</h2>
+                        </div>
+                        <p className="popup-description">{rank.description}</p>
+                        <div className="popup-stats">
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">{rank.scale}</div>
+                                <div className="popup-stat-label">Rank Scale</div>
+                            </div>
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">+{rank.baseTonPerHour}</div>
+                                <div className="popup-stat-label">TON/hour</div>
+                            </div>
+                        </div>
+                        <div className="popup-progress">
+                            <div className="popup-progress-bar"></div>
+                        </div>
+                        <p>Collect {3 - (ranks.indexOf(rank) % 3)} friend invites to evolve into {ranks[(ranks.indexOf(rank) + 1) % ranks.length].name}</p>
+                    </div>
+                );
+                setShowPopup(true);
+            };
+
+            const showBoosterInfo = () => {
+                setPopupContent(
+                    <div>
+                        <div className="popup-header">
+                            <span className="material-icons-round" style={{fontSize: '48px', color: '#FFA500'}}>bolt</span>
+                            <h2>Boosters</h2>
+                        </div>
+                        <p className="popup-description">Boosters amplify your TON earning power. Activate and maintain them to maximize your profits!</p>
+                        <div className="popup-stats">
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">{getActiveBoosters()}/{boosters.length}</div>
+                                <div className="popup-stat-label">Active Boosters</div>
+                            </div>
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">{getBoostMultiplier()}x</div>
+                                <div className="popup-stat-label">Current Multiplier</div>
+                            </div>
+                        </div>
+                        <p>Boosters are on 24-hour timers and can be reactivated by visiting the respective channels linked to them in the "Boosters" tab.</p>
+                        <p>Each active booster increases your TON per hour by 1x.</p>
+                    </div>
+                );
+                setShowPopup(true);
+            };
+
+            const showBoosterChannelInfo = (booster) => {
+                setPopupContent(
+                    <div>
+                        <div className="popup-header">
+                            <span className="material-icons-round" style={{fontSize: '48px', color: booster.color}}>bolt</span>
+                            <h2>{booster.name}</h2>
+                        </div>
+                        <p className="popup-description">Join the Telegram channel to reactivate this booster and increase your earnings!</p>
+                        <div className="popup-stats">
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">{booster.active ? 'Active' : 'Inactive'}</div>
+                                <div className="popup-stat-label">Status</div>
+                            </div>
+                            <div className="popup-stat">
+                                <div className="popup-stat-value">{booster.active ? formatTime(booster.timeLeft) : '00:00'}</div>
+                                <div className="popup-stat-label">Time Left</div>
+                            </div>
+                        </div>
+                        <button className="material-button" onClick={() => window.open(booster.channelLink, '_blank')}>
+                            <span className="material-icons-round">link</span>
+                            Join {booster.name} Channel
+                        </button>
+                    </div>
+                );
+                setShowPopup(true);
+            };
+
+            const formatTime = (seconds) => {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            };
+
+            const MainTab = () => (
+                <div>
+                    <button className="theme-toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
+                        {isDarkMode ? '🌞' : '🌙'}
+                    </button>
+                    <div className="username">USERNAME</div>
+                    <div className="card" onClick={showRankInfo}>
+                        <div className="card-title">RANK</div>
+                        <div className="card-value">{rank.name}</div>
+                        <div className="card-subtitle">Scale: {rank.scale}</div>
+                        <div className="card-subtitle">+{rank.baseTonPerHour} TON per hour</div>
+                    </div>
+                    <div className="card" onClick={showBoosterInfo}>
+                        <div className="card-title">BOOSTERS ACTIVE</div>
+                        <div className="boosters-dots">
+                            {boosters.map((booster, index) => (
+                                <div key={index} className={`booster-dot ${booster.active ? 'active' : ''}`}></div>
+                            ))}
+                        </div>
+                        <div className="card-value">{getBoostMultiplier()}x</div>
+                        <div className="card-subtitle">Boost Multiplier</div>
+                    </div>
+                    <div className="card">
+                        <div className="card-title">PROFIT PER HOUR</div>
+                        <div className="card-value">+{getTotalTonPerHour().toFixed(2)} TON</div>
+                    </div>
+                    <div className="balance-container balance-display" ref={balanceRef}>
+                        <div className="balance-animator animate">
+                            {animatedBalance.toFixed(6).padStart(10, '0')} TON
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const BoostersTab = () => (
+                <div>
+                    <div className="card">
+                        <div className="card-title">BOOST</div>
+                        <div className="card-value">{getBoostMultiplier()}x</div>
+                        <div className="card-subtitle">{getActiveBoosters()} OF {boosters.length} ACTIVE</div>
+                    </div>
+                    {boosters.map(booster => (
+                        <button 
+                            key={booster.id} 
+                            className="booster-button"
+                            style={{
+                                backgroundColor: booster.color,
+                            }}
+                            onClick={() => showBoosterChannelInfo(booster)}
+                        >
+                            <div>
+                                {booster.name}
+                                <div className="booster-timer">
+                                    {booster.active ? `Resets: ${formatTime(booster.timeLeft)}` : 'Inactive'}
+                                </div>
+                            </div>
+                            <div className={`led-indicator ${booster.active ? 'on' : 'off'}`}></div>
+                            <div 
+                                className="booster-progress"
+                                style={{
+                                    width: `${(booster.timeLeft / 86400) * 100}%`
+                                }}
+                            ></div>
+                        </button>
+                    ))}
+                </div>
+            );
+
+            const ReferralsTab = () => (
+                <div>
+                    <h2>Referral Program</h2>
+                    <div className="referral-link">
+                        https://t.me/NotCoinEarner_bot?start=ref123456
+                    </div>
+                    <p>Share this link to earn bonuses and increase your rank!</p>
+                    <button className="material-button">
+                        <span className="material-icons-round">content_copy</span>
+                        Copy Link
+                    </button>
+                    <button className="material-button">
+                        <span className="material-icons-round">share</span>
+                        Share Link
+                    </button>
+                    <div className="card">
+                        <div className="card-title">YOUR REFERRALS</div>
+                        <div className="card-value">5</div>
+                        <div className="card-subtitle">Next rank at 10 referrals</div>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="container">
+                    {activeTab === 'main' && <MainTab />}
+                    {activeTab === 'boosters' && <BoostersTab />}
+                    {activeTab === 'referrals' && <ReferralsTab />}
+                    <div className="tab-buttons">
+                        <button className={`tab-button ${activeTab === 'main' ? 'active' : ''}`} onClick={() => setActiveTab('main')}>
+                            <span className="material-icons-round">dashboard</span>
+                        </button>
+                        <button className={`tab-button ${activeTab === 'boosters' ? 'active' : ''}`} onClick={() => setActiveTab('boosters')}>
+                            <span className="material-icons-round">bolt</span>
+                        </button>
+                        <button className={`tab-button ${activeTab === 'referrals' ? 'active' : ''}`} onClick={() => setActiveTab('referrals')}>
+                            <span className="material-icons-round">group</span>
+                        </button>
+                    </div>
+                    {showPopup && (
+                        <div className="popup" onClick={() => setShowPopup(false)}>
+                            <div className="popup-content" onClick={e => e.stopPropagation()}>
+                                <button className="close-button" onClick={() => setShowPopup(false)}>
+                                    <span className="material-icons-round">close</span>
+                                </button>
+                                {popupContent}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+
+        // Telegram WebApp initialization
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+    </script>
+</body></html>

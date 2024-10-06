@@ -1,0 +1,165 @@
+# Game Plan for Telegram Web App Development
+
+## Step 1: Set up the development environment
+
+1. Install Node.js and npm
+   - Download and install Node.js from https://nodejs.org/ (this will include npm)
+   - Verify installation by running `node --version` and `npm --version` in the terminal
+
+2. Create a new React project using Create React App
+   - Open a terminal and navigate to your desired project directory
+   - Run the following command:
+     ```
+     npx create-react-app telegram-web-app
+     ```
+   - Once finished, navigate into the project folder:
+     ```
+     cd telegram-web-app
+     ```
+
+3. Install necessary dependencies
+   - Install react-router-dom for routing:
+     ```
+     npm install react-router-dom
+     ```
+   - Install styled-components for styling:
+     ```
+     npm install styled-components
+     ```
+
+4. Set up the project structure
+   - Create the following folders in the `src` directory:
+     - components
+     - pages
+     - utils
+     - assets
+   - Create a `styles` folder in the `src` directory for global styles
+
+5. Set up a global styles file
+   - In the `src/styles` folder, create a file named `GlobalStyles.js`
+   - Set up basic global styles using styled-components
+
+6. Clean up the default Create React App files
+   - Remove unnecessary files like `logo.svg` and `App.test.js`
+   - Clean up `App.js` to be a basic functional component
+
+7. Set up the main App component
+   - Modify `App.js` to include routing and the basic structure of the app
+
+8. Create a basic `index.html` file
+   - Modify the existing `public/index.html` file to include necessary meta tags and the Telegram Web App script
+
+9. Set up Git repository (if not already done by Create React App)
+   - Initialize Git repository:
+     ```
+     git init
+     ```
+   - Create a `.gitignore` file (if not already present)
+   - Make an initial commit
+
+10. Test the setup
+    - Run the development server:
+      ```
+      npm start
+      ```
+    - Verify that the app runs without errors and you can see a basic React app in the browser
+
+This completes the setup phase of the project. Once these steps are completed, we'll have a solid foundation to start building the Telegram Web App. The next phases will involve creating components, implementing state management, and adding functionality.
+
+## Step 2: Project structure
+
+1. Organize the project into components, pages, and utility folders
+   - In the `src/components` folder, create the following subfolders:
+     - `common` (for reusable components like Button, Card, etc.)
+     - `layout` (for components like Header, Footer, etc.)
+     - `tabs` (for tab-specific components)
+   - In the `src/pages` folder, create files for each main view:
+     - `MainPage.js`
+     - `BoostersPage.js`
+     - `ReferralsPage.js`
+   - In the `src/utils` folder, create the following files:
+     - `api.js` (for API-related functions)
+     - `helpers.js` (for utility functions)
+     - `constants.js` (for app-wide constants)
+
+2. Create an assets folder for images and SVGs
+   - In the `src/assets` folder, create the following subfolders:
+     - `images`
+     - `icons`
+   - Add any necessary images or icons to these folders
+
+3. Set up a global styles file
+   - In the `src/styles` folder, create the following files:
+     - `theme.js` (for defining color schemes, typography, etc.)
+     - `GlobalStyles.js` (for setting up global styles)
+
+4. Create basic component files
+   - In `src/components/common`, create:
+     - `Button.js`
+     - `Card.js`
+     - `TabButton.js`
+     - `Popup.js`
+   - In `src/components/layout`, create:
+     - `Header.js`
+     - `Footer.js`
+   - In `src/components/tabs`, create:
+     - `MainTab.js`
+     - `BoostersTab.js`
+     - `ReferralsTab.js`
+
+5. Set up routing
+   - In `src/App.js`, import necessary components from react-router-dom
+   - Set up basic routing structure for main pages
+
+6. Create a config file
+   - In the `src` folder, create a `config.js` file for environment-specific configurations
+
+7. Update `index.js`
+   - Import and apply GlobalStyles
+   - Wrap the App component with necessary providers (e.g., Router, ThemeProvider)
+
+8. Set up basic state management
+   - Create a `src/context` folder
+   - Add `AppContext.js` for global state management
+
+This structure sets up a solid foundation for the Telegram Web App. It organizes the code in a modular and maintainable way, making it easier to develop and scale the application as needed.
+
+Next steps will involve implementing these components and adding functionality to the app.
+
+## Step 3: Component development
+
+1. Implement common components
+   - Create Button component
+   - Create Card component
+   - Create TabButton component
+   - Create Popup component
+
+2. Implement layout components
+   - Create Header component
+   - Create Footer component
+
+3. Implement tab components
+   - Create MainTab component
+   - Create BoostersTab component
+   - Create ReferralsTab component
+
+4. Implement page components
+   - Create MainPage component
+   - Create BoostersPage component
+   - Create ReferralsPage component
+
+5. Update App component
+   - Integrate layout components
+   - Set up navigation between tabs
+
+6. Implement basic styling
+   - Use styled-components for each component
+   - Apply theme variables from theme.js
+
+7. Add prop-types for type checking
+   - Install prop-types package
+   - Add prop type definitions to all components
+
+8. Create test files for components
+   - Set up Jest and React Testing Library
+   - Write basic tests for each component

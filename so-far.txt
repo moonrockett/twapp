@@ -1,0 +1,354 @@
+1. Set up initial React project structure
+   - Created a new React project using Create React App
+   - Organized the project into components, pages, and utility folders
+
+2. Implemented basic tab navigation
+   - Used React Router for navigation between tabs
+   - Created separate components for each tab (MainTab, BoostersTab, ReferralsTab)
+
+3. Added styled-components for styling
+   - Installed styled-components library
+   - Created global styles and theme variables
+
+4. Created MainTab component with basic layout
+   - Implemented a card-based design for displaying information
+   - Used styled-components for component-specific styling
+
+5. Implemented dark mode toggle and user info button
+   - Added state management for dark mode
+   - Created a theme object with light and dark mode colors
+
+6. Fixed issue with TabButton component
+   - Resolved prop naming conflicts
+   - Implemented proper styling for active and inactive states
+
+7. Fixed recurring issue with `isActive` prop
+   - Used transient props in styled-components to avoid DOM warnings
+
+8. Enhanced MainTab component with styling and animations
+   - Added Framer Motion for entrance and exit animations
+   - Implemented smooth animations for balance display
+
+9. Updated App.js to dynamically load Material Icons font
+   - Used useEffect hook to inject Material Icons font link
+
+10. Improved dark mode functionality
+    - Created separate themes for MUI and styled-components
+    - Implemented useEffect hook to update body styles based on theme
+
+11. Enhanced MainTab expanded information styling
+    - Used MUI Collapse component for expandable sections
+    - Implemented Framer Motion animations for expand/collapse effects
+
+12. Major design overhaul
+    - Integrated Framer Motion for page transitions and micro-interactions
+    - Implemented Material-UI components for a consistent and professional look
+    - Created a responsive layout using flexbox and CSS Grid
+
+13. Updated dependencies
+    - Migrated from @material-ui/core to @mui/material for React 18 compatibility
+    - Updated import statements and component usage accordingly
+
+14. Improved dark mode functionality
+    - Implemented a more robust theming system using MUI's createTheme
+    - Created a separate styled-components theme for custom components
+    - Used useEffect to dynamically update body styles on theme change
+
+15. Enhanced MainTab expanded information
+    - Implemented collapsible sections using MUI's Collapse component
+    - Added custom animations using Framer Motion for smooth transitions
+    - Improved the visual design of expanded content for better user experience
+
+16. Fixed compilation errors and missing components
+    - Replaced TopBar and BottomNav with Header and Footer components
+    - Updated theme object to include all necessary properties
+    - Resolved issues with undefined theme properties in styled components
+
+17. Removed react-spring and simplified animations
+    - Uninstalled react-spring library to resolve dependency conflicts
+    - Updated MainTab component to use only Framer Motion for animations
+    - Simplified balance display animation using Framer Motion's spring animation
+
+18. Resolved dependency issues
+    - Installed @emotion/react and @emotion/styled packages
+    - These packages are required by Material-UI (MUI) for styling
+    - This step resolved errors related to missing @emotion modules
+
+19. Continuing to refine the application structure
+    - Ensuring all components are properly importing required dependencies
+    - Double-checking that all styled-components are using the correct theme properties
+
+20. Troubleshooting dependency issues
+    - Uninstalled and reinstalled @mui/material, @mui/icons-material, @emotion/react, and @emotion/styled
+    - Cleared npm cache and rebuilt node modules
+    - Added explicit styled-engine configuration to package.json
+    - Created custom .babelrc file to ensure proper JSX transformation
+    - Installed necessary Babel dependencies for custom configuration
+
+21. Improved overall design and layout
+    - Enhanced MainTab component with better styled components
+    - Improved typography and card design in MainTab
+    - Adjusted App.js layout for full-height design and proper spacing
+    - Updated color scheme for better contrast and readability
+    - Ensured consistent styling across light and dark modes
+
+22. Reverted to previous preferred design while maintaining functionality
+    - Reintroduced tab switching functionality in App.js
+    - Brought back logos (icons) for tab buttons
+    - Simplified MainTab component to match previous design
+    - Maintained dark mode functionality and theme consistency
+    - Kept Framer Motion animations for smooth transitions
+
+23. Reverted to a more visually appealing design
+    - Updated MainTab component with improved styling and layout
+    - Reintroduced icons and animations in the MainTab
+    - Brought back tab switching functionality in App.js
+    - Added logos (icons) for tab buttons
+    - Improved overall visual design while maintaining core functionality
+
+24. Version 1.0.0 - Integrated additional components and functionality
+    - Added Popup component for displaying additional information
+    - Implemented ThemeToggle component for switching between light and dark modes
+    - Updated App.js to include new components and manage state for popups and theme
+    - Ensured design consistency with the HTML file
+    - Dependencies: React, styled-components, @mui/material
+
+25. Version 1.1.0 - Enhanced components and added new features
+    - Created RankInfo component for displaying user rank information
+    - Updated MainTab to include animated balance display and rank info
+    - Enhanced BoostersTab with more detailed booster information and progress bars
+    - Implemented popup functionality for displaying additional information
+    - Updated App.js to manage popup state and pass it to child components
+    - Dependencies: React, styled-components, @mui/material, framer-motion
+    - New files: src/components/RankInfo.js
+    - Modified files: src/components/MainTab.js, src/components/BoostersTab.js, src/App.js, so-far.txt
+
+26. Version 1.1.1 - Fixed dark mode and added icons to tab buttons
+    - Updated GlobalStyles.js to properly handle dark mode
+    - Added icons to tab buttons in App.js using @mui/icons-material
+    - Fixed issues with dark mode not applying correctly
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - Modified files: src/styles/GlobalStyles.js, src/App.js, so-far.txt
+
+27. Version 1.1.2 - Improved dark mode functionality
+    - Updated GlobalStyles.js to properly apply dark mode styles to the entire application
+    - Modified App.js to use a container with theme-aware styles
+    - Ensured smooth transitions between light and dark modes for all elements
+    - Fixed issues with text readability in dark mode
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - Modified files: src/styles/GlobalStyles.js, src/App.js, so-far.txt
+
+28. Version 2.0.0 - Stable Dark Mode Implementation and Component Refinement
+    
+    BOOKMARK: Stable Dark Mode and Core Functionality
+    
+    Overview:
+    This version marks a significant milestone in the project's development. We have successfully implemented a fully functional dark mode and refined the core components of the application. The app now closely resembles the design and functionality of the original HTML prototype while leveraging React's component-based architecture.
+
+    Key Features:
+    1. Fully functional dark mode with smooth transitions
+    2. Tab-based navigation with icons
+    3. Animated balance display
+    4. Rank information system
+    5. Booster management system
+    6. Referral system
+    7. Popup component for additional information
+
+    Component Structure:
+    - App.js: Main container, manages global state and routing
+    - MainTab.js: Displays user's rank and balance
+    - BoostersTab.js: Shows active boosters and their status
+    - ReferralsTab.js: Displays referral link and information
+    - RankInfo.js: Reusable component for displaying rank details
+    - Popup.js: Reusable component for modal dialogs
+    - ThemeToggle.js: Toggles between light and dark mode
+
+    State Management:
+    - React's useState and useEffect hooks for local state management
+    - Props passing for component communication
+
+    Styling:
+    - styled-components for component-specific styles
+    - GlobalStyles.js for app-wide styles and theme variables
+
+    Animations:
+    - Framer Motion for balance display animation
+
+    Key Functions:
+    - toggleTheme(): Switches between light and dark mode
+    - handleShowPopup(): Displays popup with dynamic content
+    - formatTime(): Formats seconds into HH:MM format for boosters
+
+    Dependencies:
+    - React
+    - styled-components
+    - @mui/material
+    - @mui/icons-material
+    - framer-motion
+
+    File Structure:
+    src/
+    ├── components/
+    │   ├── MainTab.js
+    │   ├── BoostersTab.js
+    │   ├── ReferralsTab.js
+    │   ├── RankInfo.js
+    │   ├── Popup.js
+    │   └── ThemeToggle.js
+    ├── styles/
+    │   └── GlobalStyles.js
+    └── App.js
+
+    Next Steps:
+    - Implement backend integration for real-time data
+    - Enhance animations and transitions between tabs
+    - Add user authentication and profile management
+    - Optimize performance for larger datasets
+
+    This version provides a solid foundation for further development and feature additions. The dark mode implementation and component structure allow for easy maintenance and scalability.
+
+30. Version 2.2.0 - Added Booster Indicator to Main Tab
+    - Created new BoosterIndicator component to display active boosters
+    - Updated MainTab to include BoosterIndicator
+    - Added popup with booster information when clicking on the BoosterIndicator
+    - Updated balance calculation to consider active boosters
+    - Enhanced daily earnings display to reflect booster multiplier
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - New files: src/components/BoosterIndicator.js
+    - Modified files: src/components/MainTab.js, so-far.txt
+
+    Next steps:
+    - Refine the BoostersTab design and functionality
+    - Implement real-time updates for booster status
+    - Add animations for booster activation/deactivation
+
+31. Version 2.3.0 - Enhanced BoostersTab with 10 Boosters and Timer Functionality
+    - Updated BoostersTab to include 10 unique boosters with names, colors, and descriptions
+    - Implemented a countdown timer for each booster
+    - Added progress bars to visually represent remaining booster time
+    - Boosters become inactive (greyed out) when their timer reaches zero
+    - Created popup with detailed booster information and action button
+    - Prepared handleBoosterAction function for future implementation of booster restarting logic
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - Modified files: src/components/BoostersTab.js, so-far.txt
+
+    Next steps:
+    - Implement the logic for restarting inactive boosters
+    - Connect booster status to the main balance calculation
+    - Add animations for booster activation/deactivation
+    - Implement persistent storage for booster status across sessions
+
+32. Version 2.4.0 - Enhanced Booster Activation System
+    - Added seconds to booster reset timers for more precise tracking
+    - Displayed Telegram channel names on booster buttons for easy reference
+    - Implemented activation code system for reactivating inactive boosters
+    - Updated booster info popup to include channel information and activation instructions
+    - Prepared for backend integration of activation code verification
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - Modified files: src/components/BoostersTab.js, so-far.txt
+
+    Next steps:
+    - Implement backend service for generating and managing activation codes
+    - Integrate backend verification for booster activation codes
+    - Add error handling for incorrect activation codes
+    - Implement persistent storage for booster status across sessions
+
+33. Version 2.5.0 - Refined Booster Activation System
+    - Updated BoostersTab to use a 6-character activation code input
+    - Implemented a visual representation of the continuous letter string for activation codes
+    - Added individual input fields for each letter of the activation code
+    - Improved UX for entering activation codes from channel posts
+    - Prepared for backend integration of activation code verification
+    - Dependencies: React, styled-components, @mui/material, @mui/icons-material, framer-motion
+    - Modified files: src/components/BoostersTab.js, so-far.txt
+
+    Next steps:
+    - Implement backend service for managing the continuous activation code string
+    - Integrate backend verification for booster activation codes
+    - Add error handling for incorrect activation codes
+    - Implement persistent storage for booster status across sessions
+    - Consider adding visual feedback (e.g., animations) when entering activation codes
+
+34. Version 3.0.0 - Enhanced Booster System with Channel Integration
+
+BOOKMARK: Comprehensive Booster System with Telegram Channel Integration
+
+Overview:
+This version marks a significant enhancement to the booster system, integrating it closely with Telegram channels. The application now features a sophisticated activation mechanism that encourages user engagement with linked Telegram channels, creating a symbiotic relationship between the app and external content.
+
+Key Features:
+1. 10 unique boosters with individual characteristics
+2. Real-time countdown timers for active boosters
+3. Visual progress bars for booster durations
+4. Telegram channel integration for booster activation
+5. Continuous activation code system linked to channel posts
+6. Improved user interface for booster management
+
+Component Updates:
+- BoostersTab.js: Completely revamped to include new booster activation system
+- MainTab.js: Updated to reflect changes in booster system
+- App.js: Enhanced to support new booster functionality
+- Popup.js: Improved to handle more complex booster information display
+
+Booster System:
+- Each booster is linked to a specific Telegram channel
+- Inactive boosters require a 5-letter activation code
+- Activation codes are derived from the latest 5 posts in the linked channel
+- A 6th letter (previous in sequence) is displayed to indicate continuity
+
+State Management:
+- React's useState and useEffect for local state management
+- Simulated backend integration for booster activation (to be replaced with actual backend calls)
+
+Styling:
+- Enhanced styled-components for booster buttons and activation inputs
+- Responsive design for various screen sizes
+
+Animations:
+- Smooth transitions for booster activation and deactivation
+
+Key Functions:
+- formatTime(): Formats seconds into HH:MM:SS for precise booster timers
+- handleCodeChange(): Manages activation code input
+- showBoosterInfo(): Displays detailed information about each booster
+- handleBoosterActivation(): Processes booster activation (currently simulated)
+
+Dependencies:
+- React
+- styled-components
+- @mui/material
+- @mui/icons-material
+- framer-motion
+
+File Structure Updates:
+src/
+├── components/
+│   ├── BoostersTab.js (major updates)
+│   ├── MainTab.js (minor updates)
+│   └── [other component files remain unchanged]
+├── styles/
+│   └── GlobalStyles.js (unchanged)
+└── App.js (minor updates)
+
+Next Steps:
+1. Implement backend service for managing activation codes
+2. Develop admin panel for managing booster-channel relationships
+3. Integrate real-time updates from Telegram channels
+4. Implement user authentication and profile management
+5. Enhance error handling and user feedback for activation process
+6. Optimize performance for handling multiple active boosters
+7. Implement analytics to track user engagement with channels
+
+This version provides a robust foundation for the booster system, closely integrating it with Telegram channels. The design encourages user engagement and creates a dynamic ecosystem between the app and external content platforms.
+
+35. Version 3.0.1 - Fixed Booster Indicator Display
+    - Updated BoosterIndicator component to display all 10 booster indicators
+    - Modified MainTab to pass the correct number of total boosters (10) to BoosterIndicator
+    - Improved layout of booster dots in BoosterIndicator for better display on smaller screens
+    - Dependencies remain unchanged
+    - Modified files: src/components/BoosterIndicator.js, src/components/MainTab.js, so-far.txt
+
+    Next Steps:
+    - Ensure consistency between MainTab and BoostersTab regarding active boosters
+    - Implement state management to sync booster status across components
+    - Consider adding animations for booster activation/deactivation in the indicator
