@@ -352,3 +352,7 @@ This version provides a robust foundation for the booster system, closely integr
     - Ensure consistency between MainTab and BoostersTab regarding active boosters
     - Implement state management to sync booster status across components
     - Consider adding animations for booster activation/deactivation in the indicator
+
+36. Fixed TypeError in post-build.js
+    - Added null checks and error handling to prevent accessing properties of null.
+    - Ensured that the build process can handle unexpected data structures gracefully.    
